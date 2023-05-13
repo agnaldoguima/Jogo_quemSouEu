@@ -1,0 +1,226 @@
+/*#region IMPORTS*/
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@font-face{
+    font-family: DS_DIGITAL;
+    src: url(../fonts/DS-DIGI.TTF);
+}
+
+/*#endregion*/
+
+/*#region GERAL*/
+*{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+body{
+   background-color: #e9e9e9; 
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*#endregion*/
+
+/*#region TITULO*/
+.titulo{
+    width: 100%;
+    text-align: center;
+    font-family: 'Luckiest Guy', cursive;
+    color: #ffd700;
+    margin: 10px;
+    letter-spacing: .4rem;
+}
+
+h1 {
+    font-size: 5.5em;
+    text-shadow: 0 0.1em 20px rgba(0, 0, 0, 1), 0.05em -0.03em 0 rgba(0, 0, 0, 1),
+      0.05em 0.005em 0 rgba(0, 0, 0, 1), 0em 0.08em 0 rgba(0, 0, 0, 1),
+      0.05em 0.08em 0 rgba(0, 0, 0, 1), 0px -0.03em 0 rgba(0, 0, 0, 1),
+      -0.03em -0.03em 0 rgba(0, 0, 0, 1), -0.03em 0.08em 0 rgba(0, 0, 0, 1), -0.03em 0 0 rgba(0, 0, 0, 1);
+}
+
+/*#endregion*/
+
+/*#region PLACAR*/
+.placar{
+    display: flex;
+    justify-content: center;
+    padding: 5;
+    margin-bottom: 10px;
+    background-color: #3b3b3a;
+    color: #fff;
+    border: 1px solid #9c9c9c;
+    border-radius: 5px;
+    box-shadow:  0px 2px 4px #888888;
+    font-family: 'Luckiest Guy', cursive;
+    text-align: center;
+    letter-spacing: 0.2rem;
+}
+
+.placar #vitorias, .placar #derrotas{
+    width: 270px;
+    background-color: #000;
+    margin: 2px;
+    border: 2px solid #716c6c;
+    border-radius: 5px;
+    font-size: 40px;
+    font-family: DS_DIGITAL;
+    
+}
+
+.placar #vitorias{
+    color: #02f53a
+}
+
+.placar #derrotas{
+    color: #ff0000;
+}
+/*#endregion*/
+
+/*#region IMAGEM*/
+.borda-imagem{
+    width: 600px;
+    height: 425px;
+    margin: 20px;
+    margin-top: 0;
+    border: 10px solid #ffd700;
+    border-radius: 40px;
+}
+
+.borda-imagem #imagem{
+    width: 100%;
+    height: 100%;
+    border: 10px solid #ffd700;
+    border-radius: 40px;
+    box-shadow: 0px 2px 4px #888888;
+    background-image: url(../img/img_0001.png);
+}
+/*#endregion*/
+
+/*#region PROGRESSO*/
+
+.progresso{
+    display: flex;
+    width: 500px;
+    height: 30px;
+    margin: 10px;
+    background-color: #c9c9c9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px #888888;
+}
+
+.progresso div{
+    width: 20%;
+    height: 30px;
+    background-color: #fff;
+    margin-right: 1px;
+}
+
+.progresso #progresso-01{
+    margin-left: 0;
+    border-radius: 10px 0 0 10px;
+}
+
+.progresso #progresso-05{
+    margin-right: 0;
+    border-radius: 0 10px 10px 0;
+}
+
+/*#endregion*/
+
+/*#region FORM*/
+    form{
+        width: 600px;
+    }
+/*#endregion*/
+
+/*#region INPUT*/
+.input-container{
+    position: relative;
+    margin-top: 30px;
+}
+
+.input-container label{
+    position: absolute;
+    top:20px;
+    left:0px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #e41515;
+    transition: all 0.5s ease-in-out;
+}
+
+.input-container input{
+    border: 0;
+    border-bottom: 1px solid #9c9c9c;
+    background: transparent;
+    width: 100%;
+    padding: 8px 0 5px 0;
+    font-size: 32px;
+    color: #9c9c9c;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.input-container input:focus{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #e74c3c;
+}
+
+.input-container input:focus ~ label,
+.input-container input:valid ~ label{
+    top:-12px;
+    font-size: 12px;
+    color: #9c9c9c;
+}
+/*#endregion*/
+
+/*#region BUTTON*/
+#jogarNovamente button{
+    /* display: none; */
+    background: #ffd700;
+    width: 430px;
+    margin-top: 10px;
+    padding: 3px;
+    border-radius: 10px;
+    border: 2px solid dimgray;
+    box-shadow: 0 2px 4px #888888;
+    font-family: "Luckiest Guy", cursive;
+    font-size: 1.7em;
+    cursor: pointer;
+}
+
+#jogarNovamente button:hover{
+    font-size: 1.75em;
+    background-color: #84e712;
+}
+/*#endregion*/
+
+/*#region FOOTER*/
+footer{
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    color: dimgray;
+    font-family: 'Poppins', 'sans-serif';
+    font-size: 0.8em;
+}
+
+footer a{
+    margin: 0 5px;
+    color: dimgray;
+    transition: transform .2s;
+}
+
+footer a:hover{
+    color: #e41515;
+    transform: scale(1.5);
+}
+/*#endregion*/
