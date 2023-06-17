@@ -200,3 +200,20 @@ const listPersonagens = [
         imagem:"./img/img_0050.jpg",
     }
 ];
+
+let nomePersonagem;
+let imagemPersonagem;
+
+SorteiaImagem();
+function SorteiaImagem(){
+    const index = parseInt(Math.random() * listPersonagens.length)
+
+    nomePersonagem = listPersonagens[index].nome;
+    imagemPersonagem = listPersonagens[index].imagem;
+
+
+    console.log(nomePersonagem);
+    console.log(imagemPersonagem);
+    
+    document.getElementById("imagem").style.backgroundImage = "url(" + imagemPersonagem +")";
+}
