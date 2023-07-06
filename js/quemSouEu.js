@@ -203,6 +203,8 @@ const listPersonagens = [
 
 let nomePersonagem;
 let imagemPersonagem;
+let tentativas = 5;
+let resposta;
 
 SorteiaImagem();
 function SorteiaImagem(){
@@ -216,4 +218,46 @@ function SorteiaImagem(){
     console.log(imagemPersonagem);
     
     document.getElementById("imagem").style.backgroundImage = "url(" + imagemPersonagem +")";
+
+    //fesfocar a imagem
+    desfocarImagem(tentativas);
 }
+
+function desfocarImagem(valoDesfoque){
+    const imagem = document.getElementById("imagem")
+
+    switch (valoDesfoque) {
+        case 5:
+            imagem.style.filter = "blur(40px)"
+            break;
+        case 4:
+            imagem.style.filter = "blur(30px)"
+            break;
+        case 3:
+            imagem.style.filter = "blur(20px)"
+            break;
+        case 2:
+            imagem.style.filter = "blur(17px)"
+            break;
+        case 1:
+            imagem.style.filter = "blur(14px)"
+            break;
+        case 0:
+            imagem.style.filter = "blur(0)"
+            break;
+        default:
+            break;
+    }
+
+}
+
+document.addEventListener("keydown", (e) =>{
+    if(e.key === 'Enter'){
+        e.preventDefault();
+        resposta = document.querySelector("#resposta").value.toUpperCase();
+        
+        if(resposta.length < 3 || !resposta.trim() || resposta == undefined){
+            alert("isso não é um nome");
+        }
+    }
+});
