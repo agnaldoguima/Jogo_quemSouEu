@@ -221,7 +221,7 @@ function SorteiaImagem(){
 
     //fesfocar a imagem
     desfocarImagem(tentativas);
-}
+};
 
 function desfocarImagem(valoDesfoque){
     const imagem = document.getElementById("imagem")
@@ -249,7 +249,7 @@ function desfocarImagem(valoDesfoque){
             break;
     }
 
-}
+};
 
 document.addEventListener("keydown", (e) =>{
     if(e.key === 'Enter'){
@@ -257,7 +257,41 @@ document.addEventListener("keydown", (e) =>{
         resposta = document.querySelector("#resposta").value.toUpperCase();
         
         if(resposta.length < 3 || !resposta.trim() || resposta == undefined){
-            alert("isso não é um nome");
+            personalizaModal("nomeInvalido");
         }
     }
 });
+
+
+const modal = document.getElementById("modal-alerta");
+
+const span =document.getElementsByClassName("close")[0];
+span.onclick = function(){
+    modal.style.display = "none";
+}
+
+window.onclick = function(event){
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }  
+}
+
+
+function personalizaModal(alerta){
+    const modalMensagem = document.getElementById("modal-mensagem");
+
+    switch (alerta) {
+        case "nomeInvalido":
+            modalMensagem.innerHTML = "<p> Está querendo me enganar ? </p><p>Digite um nome Válido.</p>";
+            break;
+        case "vitoria":
+            modalMensagem.innerHTML = "<p> Vovê é bom nisso mesmo hein!</p><p>Nunca duvidei de você.</p>";
+            break;
+        case "derrota":
+            modalMensagem.innerHTML = "<p> Não foi dessa vez</p><p>Aposto que voce consegue na próxima.</p>";
+            break;
+        default:
+            break;
+    }
+    modal.style.display = "block";
+}
