@@ -260,16 +260,24 @@ document.addEventListener("keydown", (e) => {
       personalizaModal("nomeInvalido");
     } else {
       if (tentativas > 0) {
-        if (resposta == nomePersonagem) {
+        if (resposta == nomePersonagem) {// se entrar aqui é porque ganhou
           personalizaModal("vitoria");
-        } else {
+          document.getElementById("resposta").value = "";
+          desfocarImagem(0);
+          document.querySelector(".borda-imagem").style.border = "none";
+        } else { // se entrar aqui é porque ainda esta tentando acertar
           tentativas--;
           desfocarImagem(tentativas);
+          barraDeProgresso(tentativas)
+          document.getElementById("resposta").value = "";
         }
       }
 
-      if (tentativas == 0) {
+      if (tentativas == 0) { // se entrar aqui é porque perdeu
         personalizaModal("derrota");
+        document.getElementById("resposta").value = "";
+        desfocarImagem(0);
+        document.querySelector(".borda-imagem").style.border = "none";
       }
     }
     console.log("tentativas =" + tentativas);
@@ -308,4 +316,34 @@ function personalizaModal(alerta) {
       break;
   }
   modal.style.display = "block";
+}
+
+function barraDeProgresso(carregaBarra) {
+  if (carregaBarra == 5) {
+    document.getElementById("progresso-01").style.backgroundColor = "#ffffff";
+    document.getElementById("progresso-02").style.backgroundColor = "#ffffff";
+    document.getElementById("progresso-03").style.backgroundColor = "#ffffff";
+    document.getElementById("progresso-04").style.backgroundColor = "#ffffff";
+    document.getElementById("progresso-05").style.backgroundColor = "#ffffff";
+  } else {
+    switch (carregaBarra) {
+      case 4:
+        document.getElementById("progresso-01").style.backgroundColor = "#ffd700";
+        break;
+      case 3:
+        document.getElementById("progresso-02").style.backgroundColor = "#ffd700";
+        break;
+      case 2:
+        document.getElementById("progresso-03").style.backgroundColor = "#ffd700";
+        break;
+      case 1:
+        document.getElementById("progresso-04").style.backgroundColor = "#ffd700";
+        break;
+      case 0:
+        document.getElementById("progresso-05").style.backgroundColor = "#ffd700";
+        break;
+      default:
+        break;
+    }
+  }
 }
