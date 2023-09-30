@@ -206,6 +206,8 @@ let imagemPersonagem;
 let tentativas = 5;
 console.log("tentativas =" + tentativas);
 let resposta;
+let erros = 0;
+let acertos = 0;
 
 SorteiaImagem();
 function SorteiaImagem() {
@@ -255,12 +257,13 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     resposta = document.querySelector("#resposta").value.toUpperCase();
-
     if (resposta.length < 3 || !resposta.trim() || resposta == undefined) {
       personalizaModal("nomeInvalido");
+      document.getElementById("resposta").value = "";
     } else {
       if (tentativas > 0) {
         if (resposta == nomePersonagem) {// se entrar aqui é porque ganhou
+          acertos++;
           personalizaModal("vitoria");
           document.getElementById("resposta").value = "";
           desfocarImagem(0);
@@ -274,6 +277,7 @@ document.addEventListener("keydown", (e) => {
       }
 
       if (tentativas == 0) { // se entrar aqui é porque perdeu
+        erros++;
         personalizaModal("derrota");
         document.getElementById("resposta").value = "";
         desfocarImagem(0);
@@ -281,6 +285,8 @@ document.addEventListener("keydown", (e) => {
       }
     }
     console.log("tentativas =" + tentativas);
+    document.querySelector("#derrotas").innerText = erros;
+    document.querySelector("#vitorias").innerText = acertos;
   }
 });
 
