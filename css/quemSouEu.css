@@ -183,7 +183,7 @@ h1 {
 
 /*#region BUTTON*/
 #jogarNovamente button{
-    /* display: none; */
+    display: none;
     background: #ffd700;
     width: 430px;
     margin-top: 10px;

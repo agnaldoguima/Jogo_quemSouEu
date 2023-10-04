@@ -68,7 +68,7 @@ const listPersonagens = [
     imagem: "./img/img_0017.jpg",
   }),
   (personagem0018 = {
-    nome: "ANITA",
+    nome: "ANITTA",
     imagem: "./img/img_0018.jpg",
   }),
   (personagem0019 = {
@@ -208,6 +208,7 @@ console.log("tentativas =" + tentativas);
 let resposta;
 let erros = 0;
 let acertos = 0;
+let finalizouPartida = false;
 
 SorteiaImagem();
 function SorteiaImagem() {
@@ -254,39 +255,50 @@ function desfocarImagem(valoDesfoque) {
 }
 
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    resposta = document.querySelector("#resposta").value.toUpperCase();
-    if (resposta.length < 3 || !resposta.trim() || resposta == undefined) {
-      personalizaModal("nomeInvalido");
-      document.getElementById("resposta").value = "";
-    } else {
-      if (tentativas > 0) {
-        if (resposta == nomePersonagem) {// se entrar aqui é porque ganhou
-          acertos++;
-          personalizaModal("vitoria");
-          document.getElementById("resposta").value = "";
-          desfocarImagem(0);
+  if (finalizouPartida == false) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      resposta = document.querySelector("#resposta").value.toUpperCase();
+      if (resposta.length < 3 || !resposta.trim() || resposta == undefined) {
+        personalizaModal("nomeInvalido");
+        document.getElementById("resposta").value = "";
+      } else {
+        if (tentativas > 0) {
+          if (resposta == nomePersonagem) {// se entrar aqui é porque ganhou
+            acertos++;
+            desfocarImagem(0);
+            document.querySelector(".borda-imagem").style.border = "none";
+            mudaStatusInput(true);
+            finalizouPartida = true;
+            personalizaModal("vitoria");
+            habilitaBotaoJogarNovamente();
+          } 
+          else { // se entrar aqui é porque ainda esta tentando acertar
+            tentativas--;
+            desfocarImagem(tentativas);
+            barraDeProgresso(tentativas)
+            document.getElementById("resposta").value = "";
+          }
+        }
+  
+        if (tentativas == 0) { // se entrar aqui é porque perdeu
+          erros++;
           document.querySelector(".borda-imagem").style.border = "none";
-        } else { // se entrar aqui é porque ainda esta tentando acertar
-          tentativas--;
-          desfocarImagem(tentativas);
-          barraDeProgresso(tentativas)
-          document.getElementById("resposta").value = "";
+          document.getElementById("resposta").value = nomePersonagem;
+          mudaStatusInput(true);
+          finalizouPartida = true;
+          personalizaModal("derrota");
+          desfocarImagem(0);
+          habilitaBotaoJogarNovamente();
         }
       }
-
-      if (tentativas == 0) { // se entrar aqui é porque perdeu
-        erros++;
-        personalizaModal("derrota");
-        document.getElementById("resposta").value = "";
-        desfocarImagem(0);
-        document.querySelector(".borda-imagem").style.border = "none";
-      }
+      console.log("tentativas =" + tentativas);
+      document.querySelector("#derrotas").innerText = erros;
+      document.querySelector("#vitorias").innerText = acertos;
     }
-    console.log("tentativas =" + tentativas);
-    document.querySelector("#derrotas").innerText = erros;
-    document.querySelector("#vitorias").innerText = acertos;
+  }
+  else{
+    return;
   }
 });
 
@@ -307,16 +319,13 @@ function personalizaModal(alerta) {
 
   switch (alerta) {
     case "nomeInvalido":
-      modalMensagem.innerHTML =
-        "<p> Está querendo me enganar ? </p><p>Digite um nome Válido.</p>";
+      modalMensagem.innerHTML = "<p> Está querendo me enganar ? </p><p>Digite um nome Válido.</p>";
       break;
     case "vitoria":
-      modalMensagem.innerHTML =
-        "<p> Você é bom nisso mesmo hein!</p><p>Nunca duvidei de você.</p>";
+      modalMensagem.innerHTML = "<p> Você é bom nisso mesmo hein!</p><p>Nunca duvidei de você.</p>";
       break;
     case "derrota":
-      modalMensagem.innerHTML =
-        "<p> Não foi dessa vez</p><p>Aposto que voce consegue na próxima.</p>";
+      modalMensagem.innerHTML = "<p> Não foi dessa vez</p><p>Aposto que voce consegue na próxima.</p>";
       break;
     default:
       break;
@@ -352,4 +361,16 @@ function barraDeProgresso(carregaBarra) {
         break;
     }
   }
+}
+
+function habilitaBotaoJogarNovamente(){
+  document.getElementById("btnJogarNovamente").style.display = "inline";
+}
+
+document.querySelector("#btnJogarNovamente").addEventListener("click", function(){
+  document.querySelector("#btnJogarNovamente").style.display = "none";
+});
+
+function mudaStatusInput(condicao){
+  document.getElementById("resposta").disabled = condicao;
 }
