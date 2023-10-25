@@ -278,6 +278,7 @@ document.addEventListener("keydown", (e) => {
             desfocarImagem(tentativas);
             barraDeProgresso(tentativas)
             document.getElementById("resposta").value = "";
+            console.log("tentativas =" + tentativas);
           }
         }
   
@@ -288,7 +289,6 @@ document.addEventListener("keydown", (e) => {
           mudaStatusInput(true);
           finalizouPartida = true;
           personalizaModal("derrota");
-          desfocarImagem(0);
           habilitaBotaoJogarNovamente();
         }
       }
@@ -368,7 +368,16 @@ function habilitaBotaoJogarNovamente(){
 }
 
 document.querySelector("#btnJogarNovamente").addEventListener("click", function(){
+  finalizouPartida = false;
+  tentativas = 5;
+  SorteiaImagem();
+  desfocarImagem(tentativas);
+  mudaStatusInput(false);
+  document.getElementById("resposta").value = "";
+  document.getElementById("resposta").focus();
+  barraDeProgresso(5)
   document.querySelector("#btnJogarNovamente").style.display = "none";
+  document.querySelector(".borda-imagem").style.border = "10px solid #ffd700"
 });
 
 function mudaStatusInput(condicao){
